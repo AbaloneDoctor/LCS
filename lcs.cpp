@@ -6,9 +6,9 @@
 #include <vector>
 
 using namespace std;
-int comments = 1;
+int comments = 2;
 
-vector<string> createStringVector()
+vector<string> createStringVector() //creates list of strings, with every 2 being a pair
 {
 	vector<string> tokens;
 	char split = ' ';
@@ -42,11 +42,64 @@ vector<string> createStringVector()
 	return tokens;
 }
 
+//LCS PART 1
+
+void LCSpair( string a, string b )
+{
+	if( comments == 2 ) printf( "strings: %s, %s \n", a.c_str(), b.c_str() );
+	int aLength, bLength, i, j;
+	aLength = a.length();
+	bLength = b.length();
+	if( comments == 2 ) printf( "Lengths: %d, %d \n", aLength, bLength );
+	int c[aLength+1][bLength+1];
+	for( i = 0 ; i <= aLength ; i++ ) c[i][0] = 0;
+	for( i = 0 ; i <= bLength ; i++ ) c[0][i] = 0;
+}
+
+//prints out length then longest common string
+void LCS( vector<string> list )
+{
+	if( comments == 2 ) printf( "In LCS\n");
+	if( comments == 2 ) printf( "length of list: %d\n", list.size() );
+	int n = list.size()/2;
+	if( comments == 2 ) printf( "n size: %d\n", n);
+	int k = 0;	
+	for( int i = 0 ; i < n ; i++ )
+	{
+		LCSpair( list[k], list[k+1] );
+		k=k+2;
+	}
+}
+
+
+
+
+//vector of struct
+void allLCS( vector<string> list ){
+}
 
 
 
 int main( int argc, char *argv[] )
 {	
-	vector<string> stringList = createStringVector();	
+	int all = 0;
+	if( comments == 1) printf( "%d\n", argc );
+	//if( argc == 2 && strcmp( argv[1], "-all" ) == 0 ) { all = 1; if( comments == 1 ) printf("-all called\n");}
+	//if( strcmp( argv[1], "-all" ) == 0 ) { all = 1; if( comments == 1 ) printf("-all called\n");}
+	vector<string> stringList = createStringVector();
+	if( all == 0 && argc == 1 )
+	{
+		LCS( stringList );		
+	}	
+	else if( argc == 2 && strcmp( argv[1], "-all" ) == 0 )
+	{
+		if( comments == 1 ) printf( "Calling part 2 function\n" );
+		allLCS( stringList );
+	}
+	else
+	{
+		printf( "Incorrect input\n" );
+		exit(0);
+	}
 	return 0;
 }
