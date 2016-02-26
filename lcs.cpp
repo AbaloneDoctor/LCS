@@ -6,7 +6,7 @@
 #include <vector>
 
 using namespace std;
-int comments = 0;
+int comments = 2;
 
 vector<string> createStringVector() //creates list of strings, with every 2 being a pair
 {
@@ -128,10 +128,10 @@ int printLCS( int c[1000][1000], char b[1000][1000], string a, int i, int j )
 	//for( int k = 0 ; k < len ; k ++ )
 	while( i > 0 and j > 0 )
 	{
-		if( comments == 2 ) printf( "b[%d][%d] \n", i, j );
+		if( comments == 2 ) printf( "D: b[%d][%d] \n", i, j );
 		if( b[i][j] == 'D')
 		{
-			if( comments == 2 )printf( "word[i]: %c \n", word[i-1] );
+			if( comments == 2 )printf( " word[i]: %c \n", word[i-1] );
 			commonString = word[i-1] + commonString;
 
 			i--;
@@ -139,12 +139,12 @@ int printLCS( int c[1000][1000], char b[1000][1000], string a, int i, int j )
 		}
 		else if( b[i][j] == 'U' )
 		{
-			if( comments == 2 )printf( "U\n", a[i] );
+			if( comments == 2 )printf( "U:\n", a[i] );
 			i--;
 		}
 		else if( b[i][j] == 'L' )
 		{
-			if( comments == 2 )printf( "L\n", a[i] );
+			if( comments == 2 )printf( "L:\n", a[i] );
 			j--;
 		}
 	}
