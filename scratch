@@ -39,3 +39,23 @@ struct CandB LCSpair( string a, string b )
 	cb.B=B;
 	return cb;
 }
+
+
+
+{	
+	if( i == 0 || j == 0 ) return 0;
+	if( b[i][j] == 'D' )
+	{
+		printLCS( c, b, a, i-1, j-1 );
+		printf( "%c", a[i] );
+	}
+	else if( b[i][j] == 'U' )
+	{
+		printLCS( c, b, a, i-1, j );
+	}
+	else
+	{
+		printLCS( c, b, a, i, j-1 );
+	}
+
+}

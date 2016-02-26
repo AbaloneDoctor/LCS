@@ -6,7 +6,7 @@
 #include <vector>
 
 using namespace std;
-int comments = 2;
+int comments = 0;
 
 vector<string> createStringVector() //creates list of strings, with every 2 being a pair
 {
@@ -52,17 +52,26 @@ struct CandB
 
 struct CandB LCSpair( string a, string b )
 {
+
+
 	if( comments == 2 ) printf( "strings: %s, %s \n", a.c_str(), b.c_str() );
 	int aLength, bLength, i, j;
 	struct CandB cb;
 	aLength = a.length();
 	bLength = b.length();
+
 	if( comments == 2 ) printf( "Lengths: %d, %d \n", aLength, bLength );
 	for( i = 0 ; i <= aLength ; i++ ) cb.C[i][0] = 0;
 	for( i = 0 ; i <= bLength ; i++ ) cb.C[0][i] = 0;
-	
+
+	if( comments == 2 ) printf( "  " );
+	if( comments == 2 ) for( j = 0 ; j <= bLength ; j++ ) printf( "%c", b[j] );
+	if( comments == 2 ) printf( "\n" );
 	for( i = 1 ; i <= aLength ; i++ )
 	{
+	
+
+		if( comments == 2 ) printf ( "%c ", a[i-1] );
 		for( j = 1 ; j <= bLength ; j++ )
 		{
 			//printf( "left vs up: %d, %d \n", cb.C[i-1][ j], cb.C[i-1][ j] );
@@ -97,32 +106,49 @@ struct CandB LCSpair( string a, string b )
 	{
 		for( j = 1 ; j <= bLength; j++ )
 		{
-			printf("%d",cb.C[i][j]);
+			if( comments == 2) printf("%d",cb.C[i][j]);
 			if( comments == 2 && j%bLength == 0 ) printf("\n");
 		} 
 
 	} 
+
 	return cb;
 }
 
 
-int printLCS( char b[1000][1000], string a, int i, int j )
-{
-	//if( comments <= 2 ) printf( "In print\n" );
-	if( i == 0 || j == 0 ) return 0;
-	if( b[i][j] == 'D' )
+int printLCS( int c[1000][1000], char b[1000][1000], string a, int i, int j )
+{	
+	int len = c[i][j];
+	printf( "%d " , len);
+	char word[1000];
+	strcpy( word,  a.c_str() );
+	if( comments == 2 ) printf( "word: %s\n", word );
+	if( comments == 2 ) printf( "length: %d; \ni,j: %d, %d\n", c[i][j], i, j );
+	string commonString;
+	//for( int k = 0 ; k < len ; k ++ )
+	while( i > 0 and j > 0 )
 	{
-		printLCS( b, a, i-1, j-1 );
-		printf( "%c", a[i] );
+		if( comments == 2 ) printf( "b[%d][%d] \n", i, j );
+		if( b[i][j] == 'D')
+		{
+			if( comments == 2 )printf( "word[i]: %c \n", word[i-1] );
+			commonString = word[i-1] + commonString;
+
+			i--;
+			j--;
+		}
+		else if( b[i][j] == 'U' )
+		{
+			if( comments == 2 )printf( "U\n", a[i] );
+			i--;
+		}
+		else if( b[i][j] == 'L' )
+		{
+			if( comments == 2 )printf( "L\n", a[i] );
+			j--;
+		}
 	}
-	else if( b[i][j] == 'U' )
-	{
-		printLCS( b, a, i-1, j );
-	}
-	else
-	{
-		printLCS( b, a, i, j-1 );
-	}
+	printf( "%s\n", commonString.c_str() );
 }
 
 //prints out length then longest common string
@@ -137,7 +163,9 @@ void LCS( vector<string> list )
 	{
 		struct CandB cb = LCSpair( list[k], list[k+1] );
 		if( comments == 2 ) printf( "list k, k+1, and lengths: %s, %s, %d, %d\n", list[k].c_str(), list[k+1].c_str(), list[k].length(), list[k+1].length() );
-		printLCS( cb.B, list[k], list[k].length(), list[k+1].length() );
+		if( comments == 2 ) printf( "Common string: \n" );		
+		printLCS( cb.C, cb.B, list[k], list[k].length(), list[k+1].length() );
+		if( comments == 2 ) printf( "\n" );		
 		k=k+2;
 	}
 }
