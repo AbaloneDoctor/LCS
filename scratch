@@ -1,0 +1,41 @@
+struct CandB LCSpair( string a, string b )
+{
+	if( comments == 2 ) printf( "strings: %s, %s \n", a.c_str(), b.c_str() );
+	int aLength, bLength, i, j;
+	aLength = a.length();
+	bLength = b.length();
+	if( comments == 2 ) printf( "Lengths: %d, %d \n", aLength, bLength );
+	//int c[aLength+1][bLength+1];
+	//char B[aLength+1][bLength+1];
+	int c[1000][1000];
+	char B[1000][1000];
+	for( i = 0 ; i <= aLength ; i++ ) c[i][0] = 0;
+	for( i = 0 ; i <= bLength ; i++ ) c[0][i] = 0;
+	
+	for( i = 1 ; i <= aLength ; i++ )
+	{
+		for( j = 1 ; j <= bLength ; j++ )
+		{
+			if( a[i-1] == b[j-1] )
+			{
+				c[i][j] = c[i-1][j-1] + 1;
+				B[i][j] = 'D';
+			}
+			else if( c[i-1, j] >= c[i, j-1] )
+			{
+				c[i][j] = c[i-1][j];
+				B[i][j] = 'U';
+			}
+			else
+			{
+				c[i][j] = c[i][j-1];
+				B[i][j] = 'L';
+			}
+			
+		}
+	}
+	struct CandB cb;
+	cb.C=c;
+	cb.B=B;
+	return cb;
+}
