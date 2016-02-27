@@ -61,5 +61,5 @@ struct CandB LCSpair( string a, string b )
 }
 
 
-read n alph <<<$(echo 1000 abcdefghijklmnopqrstuvwxyz); echo 1 > alph; python -c "import random; print ''.join(random.choice('$alph') for _ in xrange($n))" >> alph; python -c "import random; print ''.join(random.choice('$alph') for _ in xrange($n))" >> alph
+read n alph <<<$(echo 999 abcdefghijklmnopqrstuvwxyz); echo 1 > alph; python -c "import random; print ''.join(random.choice('$alph') for _ in xrange($n))" >> alph; python -c "import random; print ''.join(random.choice('$alph') for _ in xrange($n))" >> alph
 
